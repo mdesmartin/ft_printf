@@ -10,243 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
 
-typedef	struct s_sc
+int	ft_arg(va_list arg, const char *txt, int len)
 {
-	int	len;
-	int	widht;
-}				t_sc;
+	char *s;
+	int	i;
 
-// char	*ft_strchr(const char *txt)
-// {
-// 	while (*txt)
-// 	{
-// 		if (*txt == '%')
-// 			return ((char *)txt);
-// 		txt++;
-// 	}
-// 	if (!txt)
-// 		return ((char *)txt);
-// 	return (NULL);
-// }
-
-int	ft_intlen(int nb, char c)
-{
-	int	i = 0;
-	int number;
-	int neg;
-
-	if (!nb)
+	if (*txt == 'c')
+//		return (write(1, (const void *)va_arg(arg, char *), 1)); // marche pas dommache ct stylai
+	{
+		ft_putchar_fd(va_arg(arg, int), 1);
 		return (1);
-	if (nb < 0)
-	{
-		neg = 1;
-		number = -nb;
-	}
-	else
-	{
-		neg = 0;
-		number = nb;
-	}
-	if (c == 'd')
-	{
-		while (number)
-		{
-			number /= 10;
-			i++;
-		}
-		return (i + neg);
-	}
-	if (c == 'x')
-	{
-		while (number)
-		{
-			number /= 16;
-			i++;
-		}
-		return (i);
-	}
-	return (0);
-}
-
-void	ft_printhexa(unsigned int x, int upper)
-{
-	char *hexa = "0123456789abcdef";
-	int	res[100];
-	int i = 0;
-
-	if (upper == 1)
-		hexa = "0123456789ABCDEF";
-
-	while (x >= 16)
-	{
-		res[i] = hexa[x % 16];
-		x = x / 16;
-		i++;
-	}
-	res[i] = hexa[x];
-	while (i >= 0)
-	{
-		ft_putchar_fd(res[i], 1);
-		i--;
-	}
-}
-
-const char	*ft_search_arg(va_list arg, const char *txt, t_sc *sc)
-{
-	int		d;
-	char	*s;
-	unsigned int x;
-
-	if (*txt == 'd' || *txt == 'i')
-	{
-		d = va_arg(arg, int); //traduit larg rcu en int
-		ft_putnbr_fd(d, 1);
-		sc->len += ft_intlen(d, *txt);
-	}
-	else if (*txt == 's' || *txt == 'c')
-	{
-		s = va_arg(arg, char *); //traduit larg rcu en char*
-		if (!s)
-		{
-			write(1, "(null)", 6);
-			sc->len += 6;
-		}
-		else
-		{
-			ft_putstr(s);
-			sc->len += ft_strlen(s);
-		}
-	}
-	else if (*txt == 'x') // p ??
-	{
-		x = va_arg(arg, unsigned int);
-		ft_printhexa((unsigned long)x, 0);
-		sc->len += ft_intlen((int)x, * txt);
-	}
-	else if (*txt == 'X')
-	{
-		x = va_arg(arg, unsigned int);
-		ft_printhexa((unsigned long)x, 1);
-		sc->len += ft_intlen((int)x, * txt);
 	}
 	else if (*txt == '%')
+		return (write(1, "%", 1));
+	else if (*txt == 's')
 	{
-		write(1, '%', 1);
-		sc->len += 1;
+		s = va_arg(arg, char *);
+		return (write(1, s, ft_strlen(s)));
 	}
-	else if (*txt == 'u')
+	else if (*txt == 'd' || *txt == 'i')
 	{
-		x = va_arg(arg, unsigned int);
-		ft_putnbr_fd(x, 1);
-		sc->len += ft_intlen(x, *txt);
-	} // p ?
+		i = va_arg(arg, int);
+		return (ft_put_n_count(i));
+	}
+	else if (*txt == 'p')
+	{
+//	unsigned long a recup et scocker,
+//	puis 0x et convertir en hexa le unsigned long et [utnbr]
+	}
+	if (text == 'u')
+		ft_putstr((unsigned int)ft_atoi(x));
+	if (text == 'x')
+		ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'x')));
+	if (text == 'X')
+		ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'X')));
 	else
-		return (NULL);
-	txt++;
-	return (txt);
+		return (len);
+	return (len);
 }
 
-const char	*ft_read_text(t_sc *sc, const char *txt)
-{
-	char *next;
-
-	next = ft_strchr(txt, '%');
-	if (next)
-		sc->widht = next - txt;
-	else
-		sc->widht = ft_strlen(txt);
-	write (1, txt, sc->widht);
-	sc->len += sc->widht;
-	while (*txt && *txt != '%')
-		txt++;
-	return (txt);
-}
-
-int    ft_printf(const char *txt, ...)
+int	ft_printf(const char *txt, ...)
 {
 	va_list	arg;
-	va_start(arg, txt);
-	va_list	start;
-	sc.len = 0;
-	sc.widht = 0;
+	int		len;
 
+	len = 0;
+	va_start(arg, txt);
 	while (*txt)
 	{
 		if (*txt == '%')
-			txt = ft_search_arg(arg, txt + 1, &sc);
-		else
-			txt = ft_read_text(&sc, txt);
-		if (!txt)
 		{
-			write(1, "(null)", 6);
-			va_end(arg);
-			return (sc.len);
+			len += ft_arg(arg, txt + 1, len);
+			txt += 2;
+		}
+		else
+		{
+			len += write(1, txt, 1);
+			txt++;
 		}
 	}
 	va_end(arg);
-	return (sc.len);
+	return (len);
 }
 
 int	main()
 {
-	int a = ft_printf("je suis un &s", "poisson");
-	int b = printf("je suis un &s", "poisson");
+	int t = 5;
+	int *pt = &t;
 
-	printf("\n ma fonction renvoie : %d\nl'originale renvoie : %d", a, b);
+	int a = ft_printf("f : je suis un %i des iles\n", 789);
+	int b = printf("p : je suis un %i des iles\n", 789);
+
+	printf("ma fonction renvoie : %d\nl'originale renvoie : %d", a, b);
 }
 
-// ///
-
-// int    ft_printf(const char *text, ...)
-// {
-// 	int			nb_arg;
-// 	va_list		arg;
-
-// 	va_start (arg, text);
-// 	// if (!arg)
-// 	// 	return (NULL);
-// 	while (*text)
-// 	{
-// 		while (text != '%')
-// 		{
-// 			ft_putchar_fd(*text);
-// 			text++;
-// 		}
-// 		flagtype((text + 1), va_arg(arg, int));
-// 		nb_arg--;
-// 	}
-// 	text += 2;
-// 	va_end(arg);
-// //	return (quel int ???sortie derreur ?);
-// }
-
-// static char	*ft_flag_type(char *text, int x)
-// {
-// 	if (text == 'c')
-// 		ft_putchar_fd(x);
-// 	if (text == 's')
-// 		ft_putstr(x);
-// 	if (text == '%')
-// 		ft_putchar_fd('%');
-// 	if (text == 'd' || text == 'i')
-// 		ft_putstr(ft_atoi(x));
-// 	if (text == 'u')
-// 		ft_putstr((unsigned int)ft_atoi(x));
-// 	// if (text == 'x')
-// 	// 	ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'x')));
-// 	// if (text == 'X')
-// 	// 	ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'X')));
-// }
-
-// // char	*ft_convert_hexa(va_arg(arg, int), char a)
-// // {}
-
-// int	main()
-// {}
-
-// reste a tester la fonction, changer int pour char ou *char, puis enfin hexa, proto, makefile, 
+// len of word, pourcentage a ecrire, 

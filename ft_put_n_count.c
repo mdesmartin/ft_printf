@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_put_n_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 09:26:32 by mvogel            #+#    #+#             */
-/*   Updated: 2022/11/25 09:26:33 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/30 16:37:09 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/30 16:37:11 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include "libft.h"
+#include "libftprintf.h"
 
-int ft_printf(const char *, ...);
-int	ft_put_n_count(int i);
+int	ft_put_n_count(int i)
+{
+	int	len;
 
-#endif
+	len = 1;
+	ft_putnbr_fd(i, 1);
+	if (i < 0)
+	{
+		len++;
+		i = -i;
+	}
+	while (i > 10)
+	{
+		i = i / 10;
+		len++;
+	}
+	return (len);
+}
