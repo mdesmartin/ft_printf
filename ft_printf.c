@@ -10,48 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>
+#include "ft_printf.h"
 
-int	ft_arg(va_list arg, const char *txt, int len)
+int	flag_type(va_list arg, const char *txt)
 {
-	char *s;
-	int	i;
+	char	*s;
 
 	if (*txt == 'c')
-//		return (write(1, (const void *)va_arg(arg, char *), 1)); // marche pas dommache ct stylai
-	{
-		ft_putchar_fd(va_arg(arg, int), 1);
-		return (1);
-	}
-	else if (*txt == '%')
-		return (write(1, "%", 1));
+		return (1 + ft_putchar_fd(va_arg(arg, int), 1));
 	else if (*txt == 's')
 	{
 		s = va_arg(arg, char *);
+		if (!s)
+			return (write(1, "(null)", 6));
 		return (write(1, s, ft_strlen(s)));
 	}
-	else if (*txt == 'd' || *txt == 'i')
-	{
-		i = va_arg(arg, int);
-		return (ft_put_n_count(i));
-	}
 	else if (*txt == 'p')
-	{
-//	unsigned long a recup et scocker,
-//	puis 0x et convertir en hexa le unsigned long et [utnbr]
-	}
-	if (text == 'u')
-		ft_putstr((unsigned int)ft_atoi(x));
-	if (text == 'x')
-		ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'x')));
-	if (text == 'X')
-		ft_putstr((unsigned int)ft_atoi(ft_convert_hexa(x, 'X')));
+		return (print_pt(va_arg(arg, unsigned long)));
+	else if (*txt == 'd' || *txt == 'i')
+		return (print_nbr(va_arg(arg, int)));
+	else if (*txt == 'u')
+		return (print_unsigned(va_arg(arg, long int)));
+	else if (*txt == 'x')
+		return (print_hexa(va_arg(arg, long int), 0));
+	else if (*txt == 'X')
+		return (print_hexa(va_arg(arg, long int), 1));
+	else if (*txt == '%')
+		return (write(1, "%", 1));
 	else
-		return (len);
-	return (len);
+		return (write(1, &*txt, 1));
 }
 
 int	ft_printf(const char *txt, ...)
@@ -61,32 +48,34 @@ int	ft_printf(const char *txt, ...)
 
 	len = 0;
 	va_start(arg, txt);
+	if (write(1, 0, 0) != 0)
+		return (-1);
 	while (*txt)
 	{
 		if (*txt == '%')
 		{
-			len += ft_arg(arg, txt + 1, len);
-			txt += 2;
+			txt++;
+			if (*txt != '\0')
+				len += flag_type(arg, txt);
 		}
 		else
-		{
-			len += write(1, txt, 1);
-			txt++;
-		}
+			len += write(1, txt, 1);ls
+		txt++;
 	}
 	va_end(arg);
 	return (len);
 }
 
+#include <limits.h>
+#include <stdio.h>
+
 int	main()
 {
-	int t = 5;
-	int *pt = &t;
-
-	int a = ft_printf("f : je suis un %i des iles\n", 789);
-	int b = printf("p : je suis un %i des iles\n", 789);
-
-	printf("ma fonction renvoie : %d\nl'originale renvoie : %d", a, b);
+//	ft_printf(NULL);
+	int i = ft_printf("ok");
+	printf("%d", i);
 }
 
-// len of word, pourcentage a ecrire, 
+// // // trouver moyen de linker vers les fichiers libft plus loin plutot que de retaper ?
+// // // proteger le caracterer apres %
+// // // tester avec printf(null)

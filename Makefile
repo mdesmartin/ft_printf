@@ -13,7 +13,7 @@
 
 NAME = libftprintf.a
 
-HEADER = libftprintf.h
+HEADER = ft_printf.h
 
 CC = gcc
 
@@ -22,7 +22,9 @@ CFLAGS = -Wall -Wextra -Werror
 ARFLAGS = rc
 
 SRC = ft_printf.c \
-
+	convert_n_print.c \
+	ft_putchar_fd.c \
+	ft_strlen.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -43,4 +45,4 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
