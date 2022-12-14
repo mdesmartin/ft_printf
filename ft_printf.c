@@ -59,23 +59,10 @@ int	ft_printf(const char *txt, ...)
 				len += flag_type(arg, txt);
 		}
 		else
-			len += write(1, txt, 1);ls
-		txt++;
+			len += write(1, txt, 1);
+		if (*txt)
+			txt++;
 	}
 	va_end(arg);
 	return (len);
 }
-
-#include <limits.h>
-#include <stdio.h>
-
-int	main()
-{
-//	ft_printf(NULL);
-	int i = ft_printf("ok");
-	printf("%d", i);
-}
-
-// // // trouver moyen de linker vers les fichiers libft plus loin plutot que de retaper ?
-// // // proteger le caracterer apres %
-// // // tester avec printf(null)

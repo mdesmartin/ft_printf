@@ -23,8 +23,7 @@ ARFLAGS = rc
 
 SRC = ft_printf.c \
 	convert_n_print.c \
-	ft_putchar_fd.c \
-	ft_strlen.c \
+	ft_printf_utils.c \
 
 OBJ = $(SRC:.c=.o)
 
