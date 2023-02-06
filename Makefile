@@ -6,7 +6,7 @@
 #    By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 09:25:35 by mvogel            #+#    #+#              #
-#    Updated: 2023/02/06 17:18:40 by mvogel           ###   ########lyon.fr    #
+#    Updated: 2023/02/06 17:39:41 by mvogel           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ LIB_NAME = libft.a
 
 LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
-all: $(NAME)
+all: lib
+	make $(NAME)
 
 lib :
 	make -C $(LIB_PATH)
