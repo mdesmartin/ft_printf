@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 10:02:00 by mvogel            #+#    #+#             */
-/*   Updated: 2022/12/09 10:02:04 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/21 15:51:40 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/21 15:51:41 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	write(fd, &c, 1);
-	return (0);
-}
+	t_list	*current;
+	t_list	*nxt;
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!del || !lst || !*lst)
+		return ;
+	if (lst)
+	{
+		current = *lst;
+		while (current)
+		{
+			nxt = current->next;
+			ft_lstdelone(current, (del));
+			current = nxt;
+		}
+		*lst = NULL;
+	}
 }

@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 10:40:39 by mvogel            #+#    #+#             */
-/*   Updated: 2022/11/14 10:40:41 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/09 14:08:34 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/09 14:08:36 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+int	ft_toupper(int c)
 {
-	write(fd, &c, 1);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }

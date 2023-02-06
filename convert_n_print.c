@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_n_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:35:26 by mvogel            #+#    #+#             */
-/*   Updated: 2022/12/01 14:35:31 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 17:00:00 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	print_nbr(int i)
 	return (len);
 }
 
-int	print_unsigned(unsigned int u)
+int	print_unsigned(int u)
 {
 	int	len;
 

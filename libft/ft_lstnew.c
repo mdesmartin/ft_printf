@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:32:17 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:06 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/21 11:04:40 by mvogel            #+#    #+#             */
+/*   Updated: 2023/01/18 17:58:09 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/libft.h"
-# include "libft/libft.h"
-# include <stdarg.h>
+#include "libft.h"
 
-int		ft_printf(const char *txt, ...);
-int		flag_type(va_list arg, const char *txt);
-int		print_pt(unsigned long x);
-int		print_hexa(unsigned int x, int upper);
-int		print_nbr(int i);
-int		print_unsigned(int u);
-void	ft_putlongnbr_fd(long n, int fd);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-#endif
+	new = NULL;
+	new = malloc(sizeof(t_list));
+	if (new)
+	{
+		new->content = content;
+		new->next = NULL;
+	}
+	return (new);
+}

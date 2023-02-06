@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:32:17 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:06 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/21 13:54:06 by mvogel            #+#    #+#             */
+/*   Updated: 2023/01/18 17:58:28 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/libft.h"
-# include "libft/libft.h"
-# include <stdarg.h>
+#include "libft.h"
 
-int		ft_printf(const char *txt, ...);
-int		flag_type(va_list arg, const char *txt);
-int		print_pt(unsigned long x);
-int		print_hexa(unsigned int x, int upper);
-int		print_nbr(int i);
-int		print_unsigned(int u);
-void	ft_putlongnbr_fd(long n, int fd);
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
 
-#endif
+	// if (!lst || !new)
+	// 	return ;
+	if (lst)
+	{
+		if (*lst)
+		{
+			last = ft_lstlast(*lst);
+			last->next = new;
+		}
+		else
+			*lst = new;
+	}
+}

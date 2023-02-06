@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:32:17 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:06 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/13 15:10:07 by mvogel            #+#    #+#             */
+/*   Updated: 2023/01/06 14:28:42 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/libft.h"
-# include "libft/libft.h"
-# include <stdarg.h>
+#include "libft.h"
 
-int		ft_printf(const char *txt, ...);
-int		flag_type(va_list arg, const char *txt);
-int		print_pt(unsigned long x);
-int		print_hexa(unsigned int x, int upper);
-int		print_nbr(int i);
-int		print_unsigned(int u);
-void	ft_putlongnbr_fd(long n, int fd);
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		l_s1;
+	int		l_s2;
+	char	*str;
 
-#endif
+	l_s1 = ft_strlen(s1);
+	l_s2 = ft_strlen(s2);
+	str = malloc(sizeof(char) * (l_s1 + l_s2 + 1));
+	if (!(str))
+		return (NULL);
+	if (s1)
+		ft_strlcpy(str, s1, l_s1 + 1);
+	ft_strlcpy(str + l_s1, s2, l_s2 + 1);
+	return (str);
+}

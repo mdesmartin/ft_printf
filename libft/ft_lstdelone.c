@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_n_count.c                                   :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 16:37:09 by mvogel            #+#    #+#             */
-/*   Updated: 2022/11/30 16:37:11 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/21 15:38:35 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/21 15:38:36 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-int	ft_put_n_count(int i)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	len;
-
-	len = 1;
-	ft_putnbr_fd(i, 1);
-	if (i < 0)
-	{
-		len++;
-		i = -i;
-	}
-	while (i > 10)
-	{
-		i = i / 10;
-		len++;
-	}
-	return (len);
+	if (!lst || !del)
+		return ;
+	(del)(lst->content);
+	free(lst);
 }

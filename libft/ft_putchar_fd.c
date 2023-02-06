@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:32:17 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:06 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/14 10:40:39 by mvogel            #+#    #+#             */
+/*   Updated: 2023/01/16 16:32:42 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft/libft.h"
-# include "libft/libft.h"
-# include <stdarg.h>
+#include "libft.h"
 
-int		ft_printf(const char *txt, ...);
-int		flag_type(va_list arg, const char *txt);
-int		print_pt(unsigned long x);
-int		print_hexa(unsigned int x, int upper);
-int		print_nbr(int i);
-int		print_unsigned(int u);
-void	ft_putlongnbr_fd(long n, int fd);
-
-#endif
+int	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+	return (0);
+}

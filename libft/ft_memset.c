@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 09:26:32 by mvogel            #+#    #+#             */
-/*   Updated: 2022/11/25 09:26:33 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2022/11/07 15:53:14 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/07 17:15:48 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include "libft.h"
+#include "libft.h"
 
-int ft_printf(const char *, ...);
-int	ft_put_n_count(int i);
+void	*ft_memset(void *b, int c, size_t len)
+{
+	char	*s;
+	size_t	i;
 
-#endif
+	s = b;
+	i = 0;
+	while (i < len)
+	{
+		s[i] = c;
+		i++;
+	}
+	return (b);
+}
