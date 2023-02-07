@@ -6,7 +6,7 @@
 #    By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 09:25:35 by mvogel            #+#    #+#              #
-#    Updated: 2023/02/06 17:39:41 by mvogel           ###   ########lyon.fr    #
+#    Updated: 2023/02/07 13:53:23 by mvogel           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = libftprintf.a
 
 HEADER = ft_printf.h
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -38,7 +38,7 @@ all: lib
 lib :
 	make -C $(LIB_PATH)
 
-$(NAME): $(OBJ) lib
+$(NAME): $(OBJ)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 %.o: %.c Makefile $(HEADER)

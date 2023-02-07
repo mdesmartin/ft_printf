@@ -6,13 +6,12 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:32:17 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:06 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 13:57:55 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "libft/libft.h"
 # include "libft/libft.h"
 # include <stdarg.h>
 
