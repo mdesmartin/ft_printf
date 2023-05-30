@@ -12,6 +12,6 @@ The primary objective of ft_printf is to recreate the functionality of the print
 - Flags and modifiers: The function supports flags and modifiers, such as padding, alignment, and conversion modifiers, to tailor the output to specific requirements.
 - Customizability: ft_printf allows for easy extensibility, enabling users to add their own custom format specifiers or modifiers.
 
-By working on ft_printf, you will gain a deeper understanding of string manipulation, formatting techniques, and variable argument handling. It provides a practical exercise in implementing a widely used function, helping you enhance your programming skills and understanding of the intricacies of printf-like functionality.
+*By working on ft_printf, you will gain a deeper understanding of string manipulation, formatting techniques, and variable argument handling. It provides a practical exercise in implementing a widely used function, helping you enhance your programming skills and understanding of the intricacies of printf-like functionality.*
 
 **Note:** This project was developed as part of the 42 school curriculum and should be considered a learning exercise rather than a fully-featured printf implementation for production use.
